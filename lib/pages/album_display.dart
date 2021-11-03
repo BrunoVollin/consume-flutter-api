@@ -23,7 +23,6 @@ class _AlbumDisplayState extends State<AlbumDisplay> {
               Row(
                 children: [
                   Container(
-                    // width: double.infinity,
                     child: const Text(
                       "Title: ",
                       textAlign: TextAlign.left,
@@ -36,10 +35,8 @@ class _AlbumDisplayState extends State<AlbumDisplay> {
                     fit: FlexFit.loose,
                     child: Text(
                       widget.album.title,
-                      // textAlign: TextAlign.center,
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
-                      // textAlign: TextAlign.right,
                       style: const TextStyle(fontSize: 25),
                     ),
                   ),
@@ -48,7 +45,6 @@ class _AlbumDisplayState extends State<AlbumDisplay> {
               Row(
                 children: [
                   Container(
-                    // width: double.infinity,
                     child: const Text(
                       "Id do Usuario: ",
                       textAlign: TextAlign.left,
@@ -64,7 +60,6 @@ class _AlbumDisplayState extends State<AlbumDisplay> {
               Row(
                 children: [
                   Container(
-                    // width: double.infinity,
                     child: const Text(
                       "Id do Album: ",
                       textAlign: TextAlign.left,

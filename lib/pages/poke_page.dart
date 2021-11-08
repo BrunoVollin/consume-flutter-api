@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:test/pages/album_display.dart';
-import 'package:test/repositories/album_repository.dart';
-import 'package:test/model/album_model.dart';
+import 'package:test/pages/poke_display.dart';
+import 'package:test/repositories/poke_repository.dart';
+import 'package:test/model/poke_model.dart';
 
-class AlbumPage extends StatefulWidget {
-  const AlbumPage({Key? key, required this.title}) : super(key: key);
+class PokePage extends StatefulWidget {
+  const PokePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  State<AlbumPage> createState() => _AlbumPageState();
+  State<PokePage> createState() => _PokePageState();
 }
 
-class _AlbumPageState extends State<AlbumPage> {
-  late Album album = Album(userId: -1, id: -1, title: "Undefined");
-  AlbumRepository albumRepo = new AlbumRepository();
-  int id = 0;
+class _PokePageState extends State<PokePage> {
+  Pokemon? pokemon;
+  String name = "ditto";
 
-  void getAlbum() async {
-    album = await albumRepo.fetchAlbumById(id);
+  PokeRepository pokeRepo = PokeRepository();
+
+  getAlbum() async {
+    pokemon = await pokeRepo.fetchPokemon(name);
     setState(() {
-      album;
+      pokemon;
     });
+    print(pokemon!.showAlbum());
+  }
+
+  showPokemon() {
+    if (pokemon != null) {
+      return PokemonDisplay(pokemon: pokemon!);
+    } 
+    return const Text("nenhum pokemon");
   }
 
   @override
@@ -36,13 +45,13 @@ class _AlbumPageState extends State<AlbumPage> {
           child: Column(
             children: [
               const Text(
-                "Entre com o Id do Album",
+                "Entre com o nome do Pokémon",
                 style: TextStyle(fontSize: 25),
               ),
               Container(height: 20),
               TextField(
                 onChanged: (text) {
-                  id = int.parse(text);
+                  name = text.toLowerCase();
                 },
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -50,13 +59,11 @@ class _AlbumPageState extends State<AlbumPage> {
                 ),
               ),
               Container(height: 10),
-              AlbumDisplay(
-                album: album,
-              ),
+              showPokemon(),
               ElevatedButton(
                 onPressed: getAlbum,
                 child: const Text(
-                  "Procurar Album",
+                  "Procurar Pokemon",
                 ),
               ),
             ],
@@ -66,4 +73,3 @@ class _AlbumPageState extends State<AlbumPage> {
     );
   }
 }
-

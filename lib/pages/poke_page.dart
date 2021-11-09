@@ -29,7 +29,7 @@ class _PokePageState extends State<PokePage> {
   showPokemon() {
     if (pokemon != null) {
       return PokemonDisplay(pokemon: pokemon!);
-    } 
+    }
     return const Text("nenhum pokemon");
   }
 
@@ -60,10 +60,16 @@ class _PokePageState extends State<PokePage> {
               ),
               Container(height: 10),
               showPokemon(),
+              Container(height: 10),
               ElevatedButton(
                 onPressed: getAlbum,
-                child: const Text(
-                  "Procurar Pokemon",
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: const Center(
+                    child: Text(
+                      "Procurar Pokemon",
+                    ),
+                  ),
                 ),
               ),
             ],
